@@ -41,19 +41,21 @@ function NarrowItDownController(MenuSearchService) {
 
   // function that gets called when user clicks on "Narrow Search Term" button
   narrowList.searchItems = function(searchTerm) {
+
     // if the search term is an empty string, we set narrowList.found to be
     // an empty array instead of getting every menu item.
     if(searchTerm == "") {
       narrowList.found = [];
     }
-    else{
+    else {
       MenuSearchService.getMatchedMenuItems(searchTerm).then(function(result) {
         narrowList.found = result;
       });
     }
-
   }
 
+  //  removes an item from the list of menu items when the user clicks
+  // on the "Don't want this one!" button
   narrowList.removeItem = function(index) {
     narrowList.found.splice(index, 1);
   }
@@ -63,6 +65,8 @@ MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 function MenuSearchService($http, ApiBasePath) {
   var service = this;
 
+  //Do an HTTP call to get the full list of menu items. Then, filter the list
+  //by the menu items whose description includes our search term.
   service.getMatchedMenuItems = function(searchTerm) {
     var response = $http({
       method: "GET",
@@ -84,7 +88,5 @@ function MenuSearchService($http, ApiBasePath) {
     });
   };
 };
-
-
 
 })();
