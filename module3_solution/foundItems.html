@@ -1,0 +1,15 @@
+<table class="table" ng-hide="narrowList.found === undefined">
+  <th>Name</th>
+  <th>Short Name</th>
+  <th>Description</th>
+  <th></th>
+
+  <tr ng-repeat="item in narrowList.found">
+    <td>{{ item.name }}</td>
+    <td>{{ item.short_name }}</td>
+    <td>{{ item.description }}</td>
+    <td><button class="btn btn-primary" ng-click="narrowList.onRemove({index: $index});">Don't want this one!</button></td>
+  </tr>
+</table>
+
+<div ng-if="narrowList.noItemsFound()">No items found.</div>

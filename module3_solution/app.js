@@ -4,14 +4,59 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.constant('ApiBasePath', "http://davids-restaurant.herokuapp.com");
+.constant('ApiBasePath', "http://davids-restaurant.herokuapp.com")
+.directive('foundItems', FoundItemsDirective);
+
+function FoundItemsDirective() {
+  var ddo = {
+    templateUrl: 'foundItems.html',
+    scope: {
+      found: '<',
+      onRemove: '&'
+    },
+    controller: FoundItemsDirectiveController,
+    controllerAs: 'narrowList',
+    bindToController: true
+  };
+
+  return ddo;
+}
+
+function FoundItemsDirectiveController() {
+  var narrowList = this;
+
+  //  we count that no items have been found if narrowList.found is not
+  // undefined and its length is zero. We check to make sure it is defined
+  // because it will be undefined until the user performs a search.
+  narrowList.noItemsFound = function (){
+    if(narrowList.found !== undefined && narrowList.found.length == 0) {
+      return true;
+    }
+  }
+}
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
   var narrowList = this;
 
-  narrowList.found = MenuSearchService.getMatchedMenuItems("chicken");
-  console.log(narrowList.found);
+  // function that gets called when user clicks on "Narrow Search Term" button
+  narrowList.searchItems = function(searchTerm) {
+    // if the search term is an empty string, we set narrowList.found to be
+    // an empty array instead of getting every menu item.
+    if(searchTerm == "") {
+      narrowList.found = [];
+    }
+    else{
+      MenuSearchService.getMatchedMenuItems(searchTerm).then(function(result) {
+        narrowList.found = result;
+      });
+    }
+
+  }
+
+  narrowList.removeItem = function(index) {
+    narrowList.found.splice(index, 1);
+  }
 };
 
 MenuSearchService.$inject = ['$http', 'ApiBasePath'];
