@@ -48,7 +48,7 @@ function NarrowItDownController(MenuSearchService) {
       narrowList.found = [];
     }
     else {
-      MenuSearchService.getMatchedMenuItems(searchTerm).then(function(result) {
+      MenuSearchService.getMatchedMenuItems(searchTerm.toLowerCase()).then(function(result) {
         narrowList.found = result;
       });
     }
