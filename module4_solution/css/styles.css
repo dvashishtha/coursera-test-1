@@ -1,3 +1,7 @@
+body {
+  font-size: 1.1em;
+}
+
 li[ui-sref]:hover {
   display: inline-block;
   cursor: pointer;
