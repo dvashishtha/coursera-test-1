@@ -39,7 +39,6 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     },
     resolve: {
       data: ['$stateParams', 'MenuDataService', function($stateParams, MenuDataService) {
-        console.log("the param is ", $stateParams.categoryShortName)
         return MenuDataService.getItemsForCategory($stateParams.categoryShortName);
       }]
     }
