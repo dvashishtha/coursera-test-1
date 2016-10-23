@@ -9,7 +9,6 @@ function MyInfoController(UserService, ApiPath) {
   var $myInfoCtrl = this;
   $myInfoCtrl.userInfo = UserService.getUserPreferences();
   $myInfoCtrl.basePath = ApiPath;
-  console.log($myInfoCtrl.userInfo);
 }
 
 })();

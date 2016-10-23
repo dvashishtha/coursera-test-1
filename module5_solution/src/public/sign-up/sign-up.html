@@ -20,6 +20,13 @@
       </span>
       <br><br>
 
+      <label for="email">Email Address: </label>
+      <input type="email" name="email" placeholder="Email" ng-model="signUpCtrl.user.email" required>
+      <span ng-if="signUpForm.email.$invalid && signUpForm.email.$touched">
+        Must be a valid email address: handle@domain format
+      </span>
+      <br><br>
+
       <label for="phone">Phone Number: </label>
       <input type="text" name="phone" placeholder="Phone ###-###-####"
       pattern="(\d{3})-(\d{3})-(\d{4})" ng-model="signUpCtrl.user.phone" >
@@ -30,6 +37,8 @@
 
       <label for="menuNumber">Menu Short Name: </label>
       <input type="text" name="menuNumber" placeholder="Menu number" ng-model="signUpCtrl.user.menuNumber">
+
+      <!-- displays the appropriate error message if the menu short name is invalid -->
       <span ng-if="!signUpCtrl.save">
         {{ signUpCtrl.error }}
       </span>
@@ -41,6 +50,8 @@
 
     </form>
     <br>
+    
+    <!-- displays the success message if the form submitted successfully -->
     <span ng-if="signUpCtrl.save">
       {{ signUpCtrl.success }}
     </span>

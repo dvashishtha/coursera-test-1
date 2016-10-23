@@ -1,21 +1,26 @@
 <div class="container">
   <h3>My Information</h3>
 
+  <!-- show only if the user has not yet registered through the sign-up form -->
   <span ng-if="myInfoCtrl.userInfo === undefined">
     Not Signed Up Yet. <a ui-sref="public.signup">Sign up Now!</a>
   </span>
 
+  <!-- show only if we saved user preferences in sign-up form -->
   <div ng-if="myInfoCtrl.userInfo !== undefined">
-    First Name:   {{ myInfoCtrl.userInfo.firstName }} <br>
-    Last Name:    {{ myInfoCtrl.userInfo.lastName  }} <br>
-    Phone Number: {{ myInfoCtrl.userInfo.phone     }} <br>
+    First Name:    {{ myInfoCtrl.userInfo.firstName }} <br>
+    Last Name:     {{ myInfoCtrl.userInfo.lastName  }} <br>
+    Email Address: {{ myInfoCtrl.userInfo.email    }} <br>
+    Phone Number:  {{ myInfoCtrl.userInfo.phone     }} <br>
     Menu Item:
     <br>
-    
+
     <div class="row">
       <div class="col-sm-5">
         <div class="menu-item-photo">
-          <img class="img-responsive" width="250" height="150" ng-src="{{myInfoCtrl.basePath}}/images/{{myInfoCtrl.userInfo.menuItem.short_name}}.jpg" alt="{{myInfoCtrl.userInfo.menuItem.name}}">
+          <img class="img-responsive" width="250" height="150"
+          ng-src="{{myInfoCtrl.basePath}}/images/{{myInfoCtrl.userInfo.menuItem.short_name}}.jpg"
+          alt="{{myInfoCtrl.userInfo.menuItem.name}}">
         </div>
       </div>
 
@@ -24,8 +29,6 @@
         <p class="menu-item-details">{{myInfoCtrl.userInfo.menuItem.description}}</p>
       </div>
     </div>
-
-
 
     <br>
   </div>
